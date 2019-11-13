@@ -1,0 +1,24 @@
+App name
+ClassTeaching
+
+Consumer API keys
+h9nWpPMflUYJWVHprs9GXDws1 (API key)
+
+vTxDeC5qnY6rU5B0nH06v6tN7erkNHgMyysAjkwrPwTWxfX9cW (API secret key)
+
+
+Access token & access token secret
+16192753-McJ0xYDzEBeEuCnaK5V1tf54fuTqkZ8LoggPZXN1s (Access token)
+
+hyRycMMVbWlNgrDEyQAjfKUZtEnzRIgnZEbus8amLTYgr (Access token secret)
+
+Read and write (Access level)
+
+
+I am a professor of emerging technologies at UNC Chapel HIll. I am teaching MJ487 Intermediate Interactive Media where I teach JavaScript development including work with APIs. We are using twitter to see tweets around a topic. http://hussman.unc.edu/directory/faculty/steven-king
+https://parklibrary.mj.unc.edu/files/2019/08/487.1-KingST-Fall2019.pdf
+
+We will be reading tweets and retweets around a specific topic or hashtag. We will not be creating new tweets or messages.
+
+
+Yes, we are creating a news interface to a specific topic. Student will search that topic and display tweets on that topic on a data dashboard.
