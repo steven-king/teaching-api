@@ -22,3 +22,39 @@ We will be reading tweets and retweets around a specific topic or hashtag. We wi
 
 
 Yes, we are creating a news interface to a specific topic. Student will search that topic and display tweets on that topic on a data dashboard.
+
+
+
+Adding Static Web createServer
+
+SignUp for Heroku
+Heroku Commands
+
+git push heroku master
+heroku logs --tail
+heroku run ls
+
+
+npm install node-static
+
+Edit package JSON
+"dependencies": {
+  "node-static": "^0.7.11",
+  "twitter": "^1.7.1"
+}
+
+create index.js
+add
+
+var static = require('node-static');
+var file = new static.Server();
+require('http').createServer(function(request, response) {
+  request.addListener('end', function() {
+    file.serve(request, response);
+  }).resume();
+}).listen(process.env.PORT || 3000);
+
+
+git init
+git add .
+git commit -am "initial commit"
