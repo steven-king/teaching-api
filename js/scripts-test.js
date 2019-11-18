@@ -11,6 +11,10 @@ console.log('loadData')
             type:"GET",
             url:"https://www.storage.cloud.google.com/teaching-api/tweets.json",
             dataType:"json",
+            headers: {
+                'Access-Control-Allow-Origin': '*'
+            },
+            crossDomain: true,
             success: parseData
 });
 
