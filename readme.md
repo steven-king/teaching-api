@@ -33,3 +33,4 @@ var params = {
 ```
 
 * Now we're ready! Open up the command prompt and type `npm start` to run the application.
+# teaching-api
