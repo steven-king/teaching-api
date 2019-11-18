@@ -9,12 +9,8 @@ function loadData(){
 console.log('loadData')
     $.ajax({
             type:"GET",
-            url:"https://www.googleapis.com/teaching-api/tweets.json",
+            url:"https://storage.googleapis.com/storage/v1/b/teaching-api/tweets.json",
             dataType:"json",
-            headers: {
-                'Access-Control-Allow-Origin': '*'
-            },
-            crossDomain: true,
             success: parseData
 });
 
