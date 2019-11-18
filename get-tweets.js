@@ -2,25 +2,65 @@ const Twitter = require('twitter');
 const config = require('./config.js');
 const fs = require('fs');
 const path = require('path');
+
+//for Google Cloud Storage
+
+//1. Install Gsutil
+//2. Enable Google Cloud storage
+//3. Create New bucket
+//      -multiregional
+//      -bucket level permissions
+//4. Set bucket to public
+//5. Set permissions of user to storageAdmin
+//    go to console
+//    Select Edit permissions from the drop-down menu.
+//    In the overlay that appears, click the + Add item button.
+//    Add a permission for allUsers.
+//    Select User for the Entity.
+//    Enter allUsers for the Name.
+//    Select Reader for the Access.
+
+
+//6 API permissions Create Service Account Key
+//    -- download json
+//    -- add to gitignore
+//7. Create and save authentication json file
+//8. Commit and push authentication json file
+//9. Test authentication using
+//gc.getBuckets().then(x => console.log(x));
+//10. Run twitter logic
+//11 save file to GCS
+// helpful for config or Google Cloud storage  https://www.youtube.com/watch?v=pGSzMfKBV9Q
+//12. set url for ajax request
+//    https://www.googleapis.com/download/storage/v1/b/[bucket]/o/[filename.json]?alt=media
+
 const {Storage} = require('@google-cloud/storage');
 const gc = new Storage({
   keyFilename: path.join(__dirname, 'deft-set-256816-75294f2887e6.json'),
   projectId: 'deft-set-256816'
 });
+
+// add bucekt config json and push
+//for testing authentication
+//gc.getBuckets().then(x => console.log(x));
+
+// saving file to GCS
 const stream     = require('stream'),
       dataStream = new stream.PassThrough(),
       gcFile     = gc.bucket('teaching-api').file('tweets.json')
 
 
-const T = new Twitter(config);
+// name of GCS bucket
+const storageBucket = gc.bucket('teaching-api');
+//console.log(storageBucket);
 
+
+
+//Start of twitter logic
+const T = new Twitter(config);
 console.log("Launching twitter-bot script");
 
 
-//gc.getBuckets().then(x => console.log(x));
-
-const storageBucket = gc.bucket('teaching-api');
-//console.log(storageBucket);
 
 
 // Set up your search parameters
@@ -55,7 +95,7 @@ console.log(thePath);
 var theFile = __dirname + '/tweetsVar.json'
 //fs.writeFileSync(theFile, completeData);
 
-
+//saving file to GCS
 dataStream.push(completeData)
 dataStream.push(null)
 
@@ -76,15 +116,9 @@ return new Promise((resolve, reject) => {
 })
 }
 
-// fs.writeFile(theFile, completeData, function(err) {
-//     console.log(err);
-//   });
-
-  // fs.writeFile(theFile, completeData, function(err) {
-  //     console.log(err);
-  //   });
 
 //console.log(completeData);
+
 saveFile();
 console.log("saved to GCS");
 console.log("https://storage.cloud.google.com/teaching-api/tweets.json");
