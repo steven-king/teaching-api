@@ -33,9 +33,9 @@ var tweets = [];
 //console.log(JSON);
 completeData = JSON.stringify(tweets);
 var thePath = __dirname;
-fs.writeFileSync(thePath + '/tweets.json', completeData);
+fs.writeFileSync(thePath + '/tweets2.json', completeData);
 console.log(completeData);
-console.log("----- saved as " + thePath + "/tweets.json ----- ");
+console.log("----- saved as " + thePath + "/tweets2.json ----- ");
 
 
   // Loop through the returned tweets
