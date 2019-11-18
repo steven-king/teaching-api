@@ -9,7 +9,7 @@ function loadData(){
 console.log('loadData')
     $.ajax({
             type:"GET",
-            url:"https:www.googleapis.com/storage/v1/teaching-api/tweets.json",
+            url:"http://storage.googleapis.com/teaching-api/tweets.json",
             dataType:"json",
             headers: {
                 'Access-Control-Allow-Origin': '*'
