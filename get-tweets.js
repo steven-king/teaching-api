@@ -3,6 +3,8 @@ const config = require('./config.js');
 const fs = require('fs');
 const T = new Twitter(config);
 
+console.log("Launching twitter-bot script");
+
 
 // Set up your search parameters
 const params = {
