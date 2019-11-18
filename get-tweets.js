@@ -1,9 +1,26 @@
 const Twitter = require('twitter');
 const config = require('./config.js');
 const fs = require('fs');
+const path = require('path');
+const {Storage} = require('@google-cloud/storage');
+const gc = new Storage({
+  keyFilename: path.join(__dirname, 'deft-set-256816-75294f2887e6.json'),
+  projectId: 'deft-set-256816'
+});
+const stream     = require('stream'),
+      dataStream = new stream.PassThrough(),
+      gcFile     = gc.bucket('teaching-api').file('tweets.json')
+
+
 const T = new Twitter(config);
 
 console.log("Launching twitter-bot script");
+
+
+//gc.getBuckets().then(x => console.log(x));
+
+const storageBucket = gc.bucket('teaching-api');
+//console.log(storageBucket);
 
 
 // Set up your search parameters
@@ -38,13 +55,41 @@ console.log(thePath);
 var theFile = __dirname + '/tweetsVar.json'
 //fs.writeFileSync(theFile, completeData);
 
-fs.writeFile(theFile, completeData, function(err) {
-    console.log(err);
-  });
 
-console.log(completeData);
-console.log("----- saved as " + theFile + "----- ");
-console.log("----- saved as " + thePath + "/tweetsFile.json ----- ");
+dataStream.push(completeData)
+dataStream.push(null)
+
+function saveFile(){
+  console.log('saving file...');
+return new Promise((resolve, reject) => {
+  dataStream.pipe(gcFile.createWriteStream({
+    resumable  : false,
+    validation : false,
+    metadata   : {'Cache-Control': 'public, max-age=31536000'}
+  }))
+  // .on('error', (error : Error) => {
+  //   reject(error)
+  // })
+  // .on('finish', () => {
+  //   resolve(true)
+  // })
+})
+}
+
+// fs.writeFile(theFile, completeData, function(err) {
+//     console.log(err);
+//   });
+
+  // fs.writeFile(theFile, completeData, function(err) {
+  //     console.log(err);
+  //   });
+
+//console.log(completeData);
+saveFile();
+console.log("saved to GCS");
+console.log("https://storage.cloud.google.com/teaching-api/tweets.json");
+// console.log("----- saved as " + theFile + "----- ");
+// console.log("----- saved as " + thePath + "/tweetsFile.json ----- ");
 
 
   // Loop through the returned tweets
