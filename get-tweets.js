@@ -32,7 +32,7 @@ var tweets = [];
 //JSON.stringify({array: tweets});
 //console.log(JSON);
 completeData = JSON.stringify(tweets);
-fs.writeFileSync('tweets.json', completeData);
+fs.writeFileSync('tweets2.json', completeData);
 console.log(completeData);
 console.log("----- saved as tweets.json ----- ");
 
