@@ -33,6 +33,8 @@ var tweets = [];
 //console.log(JSON);
 completeData = JSON.stringify(tweets);
 var thePath = __dirname;
+console.log(__dirname);
+console.log(thePath);
 fs.writeFileSync(thePath + '/tweets2.json', completeData);
 console.log(completeData);
 console.log("----- saved as " + thePath + "/tweets2.json ----- ");
