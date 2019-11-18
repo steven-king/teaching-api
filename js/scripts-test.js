@@ -9,11 +9,10 @@ function loadData(){
 console.log('loadData')
     $.ajax({
             type:"GET",
-            url:"https://storage.cloud.google.com/teaching-api/tweets.json",
+            url:"https://www.googleapis.com/download/storage/v1/b/teaching-api/o/tweets.json?alt=media",
             dataType:"json",
             success: parseData
 });
-
 
 }
 
